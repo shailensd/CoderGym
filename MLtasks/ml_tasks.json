@@ -31,6 +31,66 @@
     },
     "tasks": [
         {
+            "series": "Deep Learning (Simple)",
+            "level": 1,
+            "id": "mlp_new_breastcancer_stepLR",
+            "algorithm": "MLP Binary Classifier (StepLR)",
+            "description": "Train a simple MLP on sklearn breast cancer dataset using AdamW and a StepLR scheduler. Evaluate accuracy/F1/AUC and include MSE/R2-like metrics for protocol compliance.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Use sklearn.datasets.load_breast_cancer. Split into 80% train / 20% validation with stratification. Standardize features.",
+                "implementation": "PyTorch MLP + CrossEntropyLoss + AdamW. Add StepLR scheduler as the training feature.",
+                "evaluation": "evaluate() returns accuracy, F1, AUC plus MSE/R2-like metrics computed on probabilities vs labels on validation split.",
+                "main_block": "Train, evaluate on train+val, print metrics, assert val accuracy >= 0.90 and val F1 >= 0.90. Exit 0 on success else non-zero.",
+                "artifacts": "Save an artifacts.json with metadata, curves, and metrics."
+            }
+        },
+        {
+            "series": "Deep Learning (Simple)",
+            "level": 2,
+            "id": "mlp_new_diabetes_adamw",
+            "algorithm": "MLP Regression (AdamW + Early Stop)",
+            "description": "Train an MLP regressor on sklearn diabetes dataset using AdamW optimizer and simple early stopping on validation MSE.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Use sklearn.datasets.load_diabetes. Split into 80% train / 20% validation. Standardize features.",
+                "implementation": "PyTorch MLP regression with MSELoss, AdamW optimizer, and early stopping based on validation MSE.",
+                "evaluation": "evaluate() returns MSE, RMSE, and R2 on validation split.",
+                "main_block": "Train, evaluate on train+val, print metrics, assert val R2 >= 0.25 and finite MSE. Exit 0 on success else non-zero.",
+                "artifacts": "Save an artifacts.json with metadata, curves, and metrics."
+            }
+        },
+        {
+            "series": "Deep Learning (Simple)",
+            "level": 3,
+            "id": "cnn_new_digits_simple",
+            "algorithm": "Small CNN on Digits",
+            "description": "Train a small CNN on the offline sklearn digits dataset (8x8 grayscale). Report accuracy/macro-F1 plus MSE/R2-like metrics for protocol compliance.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Use sklearn.datasets.load_digits. Split into 80% train / 20% validation with stratification. Standardize features.",
+                "implementation": "PyTorch CNN + CrossEntropyLoss + Adam.",
+                "evaluation": "evaluate() returns accuracy, macro-F1 plus MSE/R2-like metrics computed on predicted probabilities vs one-hot labels on validation split.",
+                "main_block": "Train, evaluate on train+val, print metrics, assert val accuracy >= 0.93 and val macro-F1 >= 0.92. Exit 0 on success else non-zero.",
+                "artifacts": "Save an artifacts.json with metadata, curves, and metrics."
+            }
+        },
+        {
+            "series": "Deep Learning (Simple)",
+            "level": 4,
+            "id": "mlp_new_iris_label_smoothing",
+            "algorithm": "MLP Multiclass (Label Smoothing)",
+            "description": "Train a small MLP on sklearn iris dataset with label smoothing as an additional training feature. Report macro-F1/accuracy plus MSE/R2-like metrics for protocol compliance.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Use sklearn.datasets.load_iris. Split into 80% train / 20% validation with stratification. Standardize features.",
+                "implementation": "PyTorch MLP with label-smoothed cross-entropy loss and SGD(momentum).",
+                "evaluation": "evaluate() returns accuracy, macro-F1 plus MSE/R2-like metrics computed on predicted probabilities vs one-hot labels on validation split.",
+                "main_block": "Train, evaluate on train+val, print metrics, assert val macro-F1 >= 0.90 and val accuracy >= 0.90. Exit 0 on success else non-zero.",
+                "artifacts": "Save an artifacts.json with metadata, curves, and metrics."
+            }
+        },
+        {
             "series": "Linear Regression",
             "level": 1,
             "id": "linreg_lvl1_raw_tensors",
